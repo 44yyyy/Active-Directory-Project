@@ -49,13 +49,13 @@ Make sure to accept inbound traffic from your IP address on ports 22 and 3389 fo
 
 After this, we need to enable VPC in all of our machines so that we can set up a private network for our cloud machines.
 
+This is how it looks for one of the machines, the ADDC.
+
 ![alt text](ADDCVPC.jpg)
-![alt text](TestMachineVPC.jpg)
-![alt text](LinuxVPC.jpg)
 
 Great! We are now finished settiung up our virtual environment. To check that this works, we can access our machines through SSH or RDP and check our IP addresses on the command line.
 
-### Part 3: 
+### Part 3: Configuring Active Directory
 
 
 
