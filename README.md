@@ -23,6 +23,15 @@ This project involved building and deploying a security monitoring and response 
 
 ## Steps
 
+### Part 1: Making the Playbook
+
+Before getting started with the project, it was important to get a sense of the workflow that I wanted to make. This was essential for displaying the relationship and the interactions between different parts of the project.
+
+![alt text](Playbook.jpg)
+
+We will first deploy three virtual machines through Vultr, two of which will be Windows, and the other one being Linux on Ubuntu. For the Windows machines, one will be the Active Directory Domain Controller, and the second one will be a test machine that we will be detecting unauthorized logins from. We will install Splunk on the Ubuntu machine. Telemetry from the Windows machines will be sent to Splunk, which then will forward that information to Shuffle. Shuffle will automatically message a Slack channel and send an email that contains a user prompt that asks if the receipient (SOC analyst team) wants to disable that user account or not. If yes is chosen, Shuffle will disable the user account.
+
+### Part 2: 
 
 
 ## Conclusion
