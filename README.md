@@ -31,7 +31,41 @@ Before getting started with the project, it was important to get a sense of the 
 
 We will first deploy three virtual machines through Vultr, two of which will be Windows, and the other one being Linux on Ubuntu. For the Windows machines, one will be the Active Directory Domain Controller, and the second one will be a test machine that we will be detecting unauthorized logins from. We will install Splunk on the Ubuntu machine. Telemetry from the Windows machines will be sent to Splunk, which then will forward that information to Shuffle. Shuffle will automatically message a Slack channel and send an email that contains a user prompt that asks if the receipient (SOC analyst team) wants to disable that user account or not. If yes is chosen, Shuffle will disable the user account.
 
-### Part 2: 
+### Part 2: Setting Up the Virtual Machines
+
+Navigate to Vultr, or any cloud provider of your choice. 
+
+Deploy three virtual machines, two Windows 10 machines and one Ubuntu.
+
+Lets title them accordingly, one for the Active Directory Domain Controller, one for the test machine, and one for Splunk.
+
+![alt text](3server.jpg)
+
+After we have set up the machines on the cloud, we need to configure firewall rules so that we can access our machines from our physical device.
+
+![alt text](FirewallRules.jpg)
+
+Make sure to accept inbound traffic from your IP address on ports 22 and 3389 for SSH and RDP.
+
+After this, we need to enable VPC in all of our machines so that we can set up a private network for our cloud machines.
+
+![alt text](ADDCVPC.jpg)
+![alt text](TestMachineVPC.jpg)
+![alt text](LinuxVPC.jpg)
+
+Great! We are now finished settiung up our virtual environment. To check that this works, we can access our machines through SSH or RDP and check our IP addresses on the command line.
+
+### Part 3: 
+
+
+
+
+
+
+
+
+
+
 
 
 ## Conclusion
