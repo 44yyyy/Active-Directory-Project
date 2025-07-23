@@ -141,6 +141,8 @@ We see that when logging into "Other user", we are signing into our domain.
 
 However, a problem arises when we try to RDP in the test machine with our user account.
 
+![alt text](JaneDoeRDP.jpg)
+
 ![alt text](RDPFail.jpg)
 
 Lets fix this.
@@ -199,13 +201,21 @@ Splunk should now be installed.
 
 Run `cd /opt/splunk/bin`, then run `./splunk start`.
 
+![alt text](ScriptsLinux.jpg)
+
 When you see this message, hold down space and press y to agree with the license.
 
 ![alt text](SplunkTerms.jpg)
 
 Create the credentials for your Splunk administrator account.
 
+Lets add a new firewall rule for the Ubuntu machine on Vultr.
+
+![alt text](NewFirewallRule4Splunk.jpg)
+
 Lastly, type in `ufw allow 8000` to allow inbound connections on port 8000.
+
+Also do this for port 9997.
 
 ![alt text](AllowListeningSplunk.jpg)
 
@@ -214,6 +224,145 @@ Now we should be able to access the Splunk interface on a web browser.
 Type in the IP address of your Ubuntu machine and then port 8000.
 
 ![alt text](SplunkOnBrowser.jpg)
+
+On the Splunk interface, find the "Apps" tab on the top left corner, then press "Find More Apps".
+
+Search for Windows and install "Splunk Add-on for Microsoft Windows".
+
+![alt text](SplunkAddonForWin.jpg)
+
+Now, head over to the settings tab and click on "Indexes".
+
+Create a new index.
+
+![alt text](NewIndexSplunk.jpg)
+
+Hover back over to the settings tab and click on "Forwarding and receiving".
+
+Click on "Configure receiving" then "New Receiving Port".
+
+![alt text](ForwardingandReceiving.jpg)
+
+Now we need to set up the Splunk Universal Forwarder on both our ADDC and test machine to forward telemetry to Splunk.
+
+RDP into the test machine.
+
+Going back to the Splunk website and press on "Products".
+
+Press "Get My Free Download" under the Universal Forwarder.
+
+![alt text](UniversalForwarder.jpg)
+
+Download the 64 bit installation package for Windows.
+
+We can copy the file to our RDP session.
+
+![alt text](UniversalForwarderCopy.jpg)
+
+Double click on the installation package. We will need to create a username and password.
+
+Eventually we will reach the "Receiving Indexer" tab.
+
+For this, type in the IP address for our Ubuntu machine that has Splunk installed on it.
+
+![alt text](IndexSetup.jpg)
+
+Then, head over to file explorer.
+
+Navigate to C:\Program Files\SplunkUniversalForwarder\etc\system\default.
+
+Copy "inputs.conf", navigate to \system\local, and paste the file in.
+
+![alt text](inputsconf.jpg)
+
+Open up a notepad with admin privilieges, and open the inputs.conf file within it.
+
+At the end of the file, add these lines but with your index name instead on the second line.
+
+![alt text](inputsconfedit.jpg)
+
+Save the notepad.
+
+Now, search up "Services", navigate to the "SplunkForwarder" service, and right click to open properties.
+
+Head over to "Log On", and press "Local System Account".
+
+![alt text](splunkservice.jpg)
+
+After doing this, restart the service.
+
+We are finished setting up the forwarder on our test machine.
+
+Let's see if we are receiving information.
+
+Head back over to the Splunk web interface.
+
+Hover over "Apps" and click on "Search & Reporting".
+
+Search for our index on the search bar.
+
+![alt text](SplunkIndexSearch.jpg)
+
+We can see that we are receiving information from our test machine.
+
+Now, repeat the process we took to install the forwarder on the Domain Controller machine as well.
+
+After installing the forwarder on the other machine, we can see that our search for the index is returning two host values.
+
+This confirms that our two Windows machines are successfully forwarding data to Splunk.
+
+![alt text](2hosts.jpg)
+
+From here, lets modify our search to narrow down the events that we are concerned with.
+
+Using the Windows event code for a successful login (4624) and the specific login types (7 for Unlock and 10 for RemoteInteractive - RDP)
+
+![alt text](Search.jpg)
+
+We can also further refine the search by looking for events where the source IP address is any IP address that is not a blank address or an address that starts with 40. (assuming this is our actual office network).
+
+![alt text](ModifiedQuery.jpg)
+
+We can also make the display look cleaner.
+
+![alt text](SuccessfulDetection.jpg)
+
+We can save this search as an alert now.
+
+Make sure to also add "Add to Triggered Alerts" under the "When triggered" section.
+
+![alt text](SaveAsAlert.jpg)
+
+We can see that the alert has been caught and sent over to the "Triggered Alert" section.
+
+![alt text](AlertCaught.jpg)
+
+### Part 5: Connecting it all with Shuffle
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
