@@ -57,6 +57,186 @@ Great! We are now finished settiung up our virtual environment. To check that th
 
 ### Part 3: Configuring Active Directory
 
+To get started here, lets RDP into our ADDC machine.
+
+![alt text](RDPin.jpg)
+
+On the server manager that we should see when we first log into the Windows machine, press "add roles and features".
+
+On the "features" tab, check Active Directory Domain Services.
+
+Finally, press "add features".
+
+![alt text](InstallAD.jpg)
+
+After pressing next a few times, we should see the install button. Click on the install button, and it should be completed.
+
+![alt text](InstallADComplete.jpg)
+
+On the top of the server manager, there should be a yellow warning sign. 
+
+If we press on the warning sign, we should see "Promote this server to a domain controller".
+
+Press "Add a new forest".
+
+![alt text](DomainController.jpg)
+
+Name the domain, then make a password.
+
+When we get to the end of the process, press install.
+
+![alt text](ActiveDirectoryDomainServices.jpg)
+
+Now, our machine should have Active Directory installed and should be a Domain Controller.
+
+To confirm this, lets search for Active Directory in the search bar.
+
+![alt text](ConfirmADInstall.jpg)
+
+If we see it here, nice! It has been installed.
+
+Now, lets press on "Active Directory Users and Computers".
+
+Open up our new forest and go to the users section.
+
+![alt text](ADUsers.jpg)
+
+From here, lets create a new user named Jane Doe. 
+
+![alt text](TestUser.jpg)
+
+We are finished with the ADDC, now let's RDP into the Test Machine to join the new domain and authenticate using our new user account.
+
+When we get in the Test Machine, search up "This PC" and right click Properties.
+
+![alt text](RenameThisPC.jpg)
+
+Then, click on "change".
+
+![alt text](Change.jpg)
+
+Then, press on "Member of Domain" button and type in the domain name that we have created.
+
+![alt text](ChangeDomain.jpg)
+
+Then, we need to login with our domain administrator account.
+
+If this fails, it means that there is a DNS issue.
+
+To fix this problem, first navigate to change adapter options.
+
+Then, press on "Ethernet Instance 0 2", "Internet Protocol Version 4", and finally, type in the VPC address we got for the ADDC in "Preferred DNS address".
+
+![alt text](TestMachineIPConfiguration.jpg)
+
+After doing this, the domain registration should work.
+
+![alt text](WeareIntheAD.jpg)
+
+To see that the test machine is on the domain, we can open up the console on Vultr.
+
+![alt text](SuccessfulADRegister.jpg)
+
+We see that when logging into "Other user", we are signing into our domain.
+
+However, a problem arises when we try to RDP in the test machine with our user account.
+
+![alt text](RDPFail.jpg)
+
+Lets fix this.
+
+Going back to our console for the test machine, search up "Remote" and press "Allow remote connections to this computer".
+
+![alt text](AllowRDPTest.jpg)
+
+After navigating to the page, press on "Show settings" for the first option under Remote Desktop.
+
+![alt text](ChangeRDPSetting.jpg)
+
+Log in with the administrator account.
+
+![alt text](TypeinADPassword.jpg)
+
+After logging in, we should see this page. Press "Select Users".
+
+![alt text](ConfigureRDPAllow.jpg)
+
+Then press "Add".
+
+Now we can add our user account from our domain.
+
+![alt text](JaneDoeAllowRDP.jpg)
+
+Now, we should be able to RDP into the test machine with our user account.
+
+### Part 4: Setting up Splunk
+
+Lets open up a terminal on a device and SSH into our Ubuntu server.
+
+![alt text](SSHinUbuntu.jpg)
+
+Navigate to Splunk and create an account.
+
+Hover over the "products" bar and press on "Free Trials & Downloads".
+
+Click on "Get My Free Trial" on "Splunk Enterprise".
+
+![alt text](SplunkEnterprise.jpg)
+
+Click the "Copy wget link" on the .deb file.
+
+![alt text](wgetlinkSplunk.jpg)
+
+Go back to our SSH session, paste the link we just copied, and press enter.
+
+Splunk should now be downloaded.
+
+Then, run `dpkg -i splunk` and tab so that the Splunk autocompletes to the download.
+
+![alt text](SplunkInstall.jpg)
+
+Splunk should now be installed.
+
+Run `cd /opt/splunk/bin`, then run `./splunk start`.
+
+When you see this message, hold down space and press y to agree with the license.
+
+![alt text](SplunkTerms.jpg)
+
+Create the credentials for your Splunk administrator account.
+
+Lastly, type in `ufw allow 8000` to allow inbound connections on port 8000.
+
+![alt text](AllowListeningSplunk.jpg)
+
+Now we should be able to access the Splunk interface on a web browser.
+
+Type in the IP address of your Ubuntu machine and then port 8000.
+
+![alt text](SplunkOnBrowser.jpg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
