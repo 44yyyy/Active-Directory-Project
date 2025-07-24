@@ -387,6 +387,27 @@ We can use specific values that have been emitted from our previous event that w
 
 ![alt text](SlackMessage.jpg)
 
+We can reemit the event from the webhook and check if the message is being posted.
+
+![alt text](SlackMessageSuccess.jpg)
+
+Nice! We can now go on to the user input part of our workflow.
+
+The User Action button should be located under the triggers section as well.
+
+![alt text](UserInput.jpg)
+
+Shuffle will send an email containing the user prompt, to which the SOC analyst can press on yes or no.
+
+We can reemit the event again to see if this works.
+
+![alt text](EmailSuccess.jpg)
+
+
+
+
+
+
 
 
 
