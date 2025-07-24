@@ -339,6 +339,49 @@ We can see that the alert has been caught and sent over to the "Triggered Alert"
 
 ### Part 5: Connecting it all with Shuffle
 
+Navigate to Shuffle's website, create an account, and create a workflow.
+
+You should be greeted with this interface.
+
+![alt text](Shuffle.jpg)
+
+We are going to use a webhook to bring in data from Splunk to Shuffle.
+
+It should be located under the "Triggers" section on the left bar of Shuffle.
+
+![alt text](Webhook.jpg)
+
+Copy the webhook URI, then navigate back to Splunk.
+
+On the alert that we just created, add a webhook process under the "When Triggered" section.
+
+Paste the Shuffle webhook URI we just copied.
+
+![alt text](WebhookAlert.jpg)
+
+Now, if our alert catches an event, our webhook should receive its information as well.
+
+Lets see if this works. Some of the events are still being caught by the alert, because of the recent RDP logins.
+
+![alt text](WebhookCaught.jpg)
+
+Nice!
+
+We see the full details of the event here.
+
+![alt text](alertDetails.jpg)
+
+Lets now implement the Slack part of our workflow.
+
+
+
+
+
+
+
+
+
+
 
 
 
