@@ -2,7 +2,7 @@
 
 ## Objective
 
-This project involved building and deploying a security monitoring and response environment for Active Directory user account management. The project begins with network and infrastructure planning and is followed by deploying virtual machines in the cloud, configuring firewall rules, and establishing a Windows Active Directory domain with custom users and permissions. Logs from endpoints were forwarded to a Splunk instance, where they would go through an alert I configured to identify unauthorized login activity. To extend the workflow, I integrated Slack and Shuffle (SOAR) to build an automated response pipeline that alerts a team of analysts and allow them to disable compromised accounts directly through user prompts. This project reinforced my practical understanding of cloud infrastructure, identity management, log ingestion, SIEM tuning, and real-time security automation, essential domains for modern security operations.
+In this project, I built and deployed a security monitoring and response environment for Active Directory user account management. The project begins with network and infrastructure planning and is followed by deploying virtual machines in the cloud, configuring firewall rules, and establishing a Windows Active Directory domain with custom users and permissions. Logs from endpoints were forwarded to a Splunk instance, where they would go through an alert I configured to identify unauthorized login activity. To extend the workflow, I integrated Slack and Shuffle (SOAR) to build an automated response pipeline that alerts a team of analysts and allow them to disable compromised accounts directly through user prompts. This project reinforced my practical understanding of cloud infrastructure, identity management, log ingestion, SIEM tuning, and real-time security automation, essential domains for modern security operations.
 
 ### Skills Learned
 
@@ -372,6 +372,28 @@ We see the full details of the event here.
 ![alt text](alertDetails.jpg)
 
 Lets now implement the Slack part of our workflow.
+
+On the search bar on the left side of Shuffle, search for Slack.
+
+We will need to authenticate with our Slack account.
+
+![alt text](AuthenticateSlack.jpg)
+
+On the "Channel Value" section, copy and paste the specific channel ID that you want your message to be posted.
+
+Now let's compose the message.
+
+We can use specific values that have been emitted from our previous event that was caught by the webhook.
+
+![alt text](SlackMessage.jpg)
+
+
+
+
+
+
+
+
 
 
 
