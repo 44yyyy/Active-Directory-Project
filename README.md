@@ -397,95 +397,61 @@ The User Action button should be located under the triggers section as well.
 
 ![alt text](UserInput.jpg)
 
-Shuffle will send an email containing the user prompt, to which the SOC analyst can press on yes or no.
+Shuffle will send an email containing the user prompt, to which the SOC analyst can press on either yes or no.
 
 We can reemit the event again to see if this works.
 
 ![alt text](EmailSuccess.jpg)
 
+Now, lets make Shuffle disable the specific user account that was compromised on Active Directory.
 
+Search for Active Directory on Shuffle, and authenticate.
 
+![alt text](ADAuth.jpg)
 
+On the "Find Actions" tab, select "Disable user".
 
+For the account name, we can use the value we got from our event.
 
+![alt text](DisableShuffle.jpg)
 
+We only have the last part left. 
 
+When the user account gets disabled, we will make Shuffle send a confirmation message on the Slack channel.
 
+![alt text](ConfirmationSlack.jpg)
 
+Nice! We are done with the implementation. 
 
+Now, lets check if everything works by reemiting the webhook event one more time.
 
+After pressing on the user input, we get this status on Shuffle.
 
+![alt text](DisabledUser.jpg)
 
+Nice!
 
+Also, we get the confirmation message on Slack as intended.
 
+![alt text](ConfirmSuccess.jpg)
 
+To see if the account has really been disabled, lets try RDPing into the test machine using the user account again.
 
+After I try authenticating with the JDoe user account, I get this error message.
 
+![alt text](UserDisabledSuccess.jpg)
 
+Lets check the status of the user account from our Domain Controller.
 
+On Active Directory, we can see that Jane's account has been disabled (down arrow on the user).
 
+![alt text](DisabledJane.jpg)
 
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+We've finished our implementation!
 
 ## Conclusion
 
-
+This was my first time getting hands-on experience with Active Directory and its user management systems, and I really had fun navigating the waters. On my previous projects, I only really had to worry about one or two devices at a time. Having to manage my host computer along with three virtual machines was pretty hectic, but gave me a lot of insight on the responsibilities expected of an SOC role and how actual security environments are structured and maintained. This experience sharpened my ability to think in a multifaceted way about problems regarding security, having to troubleshoot across multiple systems, identify log patterns across them, and to design an appropriate response through structured workflows. Overall, this project really pushed me to operate like a security professional, and helped me develop some core skills expected by the industry as a whole. Thank you for reading!
 
 ## Contact
 
